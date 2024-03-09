@@ -1,0 +1,1 @@
+C:\Users\darioh\source\repos\MVCReactApp1\mvcreactapp1.client\obj\Debug\mvcreactapp1.client.esproj.CoreCompileInputs.cache
