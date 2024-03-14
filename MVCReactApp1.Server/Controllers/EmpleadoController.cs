@@ -16,7 +16,7 @@ namespace MVCReactApp1.Server.Controllers
 
         [HttpGet]
         [Route("obtener-empleados")]
-        public ActionResult<Empleado> ObtenerEmpleados()
+        public ActionResult<IEnumerable<Empleado>> ObtenerEmpleados()
         {
             var empleados = _context.Empleados.ToList();
 

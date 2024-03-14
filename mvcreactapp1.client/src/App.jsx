@@ -3,20 +3,48 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
 function App() {
-    const [nombre, setNombre] = useState('Dario');
+    const [empleado, setEmpleado] = useState([]);
 
-    useEffect(() => {
-        console.log(nombre);
-    }, [nombre]);
+    useEffect(() => { 
+        consumirApi();
+    }, []);
 
-    function cambiarNombre() {
-        setNombre('Miguel');
+    async function consumirApi() {
+        const response = await fetch('/api/empleado/obtener-empleados', {
+            method: 'GET'
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setEmpleado(data);
+        }
     }
 
     return (
         <div className="container-fluid">
-            <h1>El nombre actual es: {nombre}</h1>
-            <button onClick={() => cambiarNombre()}>Cambiar nombre</button>
+            <h5>Lista de empleados</h5>
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        empleado.map(item => (
+                            <tr key={item.idEmpleado}>
+                                <td>{item.nombre}</td>
+                                <td>{item.correo}</td>
+                                <td>{item.direccion}</td>
+                                <td>{item.telefono}</td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
         </div>
     );
 }
